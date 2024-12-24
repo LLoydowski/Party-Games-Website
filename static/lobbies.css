@@ -1,0 +1,75 @@
+.lobbies {
+    width: 100vw;
+
+    margin-top: 2vw;
+    margin-left: 6.5vw;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.7vw;
+
+    overflow: auto;
+}
+.lobby {
+    width: 15vw;
+    height: 15vw;
+
+    background-color: #ab3c9c;
+    color: #fed1ff;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+    border-radius: 2rem;
+    padding: 1vw;
+}
+.lobby p {
+    text-align: left;
+    font-size: 1vw;
+    align-self: flex-start;
+    margin: 0;
+    margin-bottom: 0.7vw;
+}
+.lobby h2 {
+    font-size: 1.4vw;
+    align-self: flex-start;
+    margin: 0;
+    margin-bottom: 0.3vw;
+}
+.lobby button {
+    width: 85%;
+    height: 15%;
+
+    border: none;
+    border-radius: 1vw;
+
+    font-size: 2vw;
+
+    color: #ffffff;
+    background-color: #f3e260;
+    cursor: pointer;
+}
+.lobby button:hover {
+    background-color: #d4c555;
+}
+.lobby .players {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1vw;
+}
+
+.lobby .players .player {
+    width: 3vw;
+    height: 3vw;
+
+    border-radius: 100%;
+
+    background-color: #e976eb;
+}

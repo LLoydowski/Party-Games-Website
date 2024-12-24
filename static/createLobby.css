@@ -1,0 +1,44 @@
+.games {
+    width: 100vw;
+
+    margin-top: 2vw;
+    margin-left: 6.5vw;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.7vw;
+
+    overflow: auto;
+}
+.game {
+    width: 15vw;
+    height: 15vw;
+
+    background-color: #ab3c9c;
+    color: #fed1ff;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+    border-radius: 2rem;
+    padding: 1vw;
+}
+.game button {
+    width: 85%;
+    height: 15%;
+
+    border: none;
+    border-radius: 1vw;
+
+    font-size: 1.5vw;
+
+    color: #ffffff;
+    background-color: #f3e260;
+    cursor: pointer;
+}
+.game button:hover {
+    background-color: #d4c555;
+}
