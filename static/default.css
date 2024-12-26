@@ -1,20 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Reenie+Beanie&display=swap");
 
+:root {
+    --bg: #000000;
+    --bg2: #00000073;
+    --btn: #1a0d96;
+    --text: rgb(194, 192, 212);
+    --accent: #5942ff;
+}
+
 body {
     margin: 0;
     font-family: "Noto Sans";
+    background-image: url("imgs/bg.png");
+    background-size: cover;
+    backdrop-filter: blur(5px);
 }
 
 .container {
     width: 100vw;
     height: 100vh;
     display: flex;
-    background-color: #652254;
     overflow: hidden;
 }
 
 nav {
-    background-color: #ab3c9cff;
+    background-color: var(--bg2);
     width: 16vw;
     height: 100vh;
 
@@ -28,7 +38,8 @@ nav {
     transition: all 0.25s;
 }
 .logoDiv {
-    width: 100%;
+    width: 80%;
+    height: 20vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,16 +47,21 @@ nav {
 .logoDiv img {
     width: 100%;
 }
+.image img {
+    width: 100%;
+}
 
 .option {
-    width: 9vw;
+    width: 11vw;
     height: 6vh;
     border-radius: 1.1vw;
 
     padding-inline: 1vw;
 
-    background-color: #c83bb5;
-    color: #fed1ff;
+    background-color: var(--bg);
+    color: var(--text);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 7px 2px var(--accent);
 
     display: flex;
     align-items: center;
@@ -56,9 +72,11 @@ nav {
     user-select: none;
     cursor: pointer;
     text-decoration: none;
+
+    transition: all 0.2s;
 }
 .option .image {
-    width: 3.5vw;
+    width: 2vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,11 +85,19 @@ nav {
     height: 100%;
 }
 .option p {
-    font-size: 1rem;
+    font-size: 1.3vw;
     width: 6vw;
     transition: all 0.2s;
     text-align: center;
 }
 .option:hover {
-    background-color: #bf36ad;
+    background-color: var(--accent);
+}
+.profile {
+    justify-self: flex-end;
+    margin-top: auto;
+    margin-bottom: 2vh;
+}
+.profile p {
+    font-size: 1vw;
 }

@@ -2,8 +2,7 @@ async function createLobby(type) {
     const url = `/create${type}`;
 
     const data = {
-        test1: "a",
-        test2: 5,
+        maxPlayers: 4,
     };
 
     let fetchPromise = fetch(url, {

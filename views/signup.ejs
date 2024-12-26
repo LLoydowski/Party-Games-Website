@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Party Games</title>
         <link rel="stylesheet" href="default.css" />
-        <link rel="stylesheet" href="createLobby.css" />
+        <link rel="stylesheet" href="signup.css" />
     </head>
     <body>
         <div class="container">
@@ -31,18 +31,9 @@
                     </div>
                     <p>About</p>
                 </a>
+
                 <!--? Profile / Login button -->
 
-                <% if(nick && nick.trim() != ""){ %>
-                <a class="option profile" href="/profile">
-                    <div class="image">
-                        <img src="imgs/person-color.png" />
-                    </div>
-
-                    <p><%=nick%></p>
-                </a>
-
-                <% } else { %>
                 <a class="option profile" href="/login">
                     <div class="image">
                         <img src="imgs/person-color.png" />
@@ -50,27 +41,31 @@
 
                     <p>Login</p>
                 </a>
-                <% } %>
             </nav>
-            <div class="games">
-                <div class="game">
-                    <div class="image">
-                        <img src="imgs/taboo.png" />
-                    </div>
-                    <div class="bottom">
-                        <h2>Taboo</h2>
-                        <p>Aha spoko ok</p>
-                        <button onclick="showCreateUI()">Create Lobby</button>
-                    </div>
+            <div class="content">
+                <div class="signup">
+                    <h2>Sign up</h2>
+                    <input
+                        type="text"
+                        placeholder="username..."
+                        id="username"
+                    />
+                    <input type="email" placeholder="email..." id="email" />
+                    <span>
+                        <input
+                            type="password"
+                            placeholder="password..."
+                            id="password"
+                        />
+                        <p>
+                            You have an account? Log in
+                            <a href="/login">here</a>
+                        </p>
+                    </span>
+                    <button onclick="createAccount()">Sign up</button>
                 </div>
             </div>
         </div>
-        <div class="createUIbg">
-            <div class="createUI">
-                <button onclick="createLobby('taboo')">Create</button>
-            </div>
-        </div>
-        <script src="default.js"></script>
-        <script src="createLobby.js"></script>
+        <script src="signup.js"></script>
     </body>
 </html>
