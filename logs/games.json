@@ -1,1 +1,13 @@
-[{"type":"taboo","maxPlayers":4,"id":"Tq3ImBo001","players":[]}]
+[
+    { "type": "taboo", "maxPlayers": 4, "id": "IGOMnT64mb", "players": [] },
+    { "type": "taboo", "maxPlayers": 4, "id": "NSNdR2rhWf", "players": [] },
+    { "type": "taboo", "maxPlayers": 4, "id": "7TkoM5KgzA", "players": [] },
+    { "type": "taboo", "maxPlayers": 4, "id": "vFwHaAi1q4", "players": [] },
+    { "type": "taboo", "maxPlayers": 4, "id": "AnB72Q4R7m", "players": [] },
+    { "type": "taboo", "maxPlayers": 4, "id": "bUFfkW7r8R", "players": [] },
+    { "type": "taboo", "maxPlayers": 4, "id": "hgSBzHykPH", "players": [] },
+    { "type": "taboo", "maxPlayers": 4, "id": "Ee37xkfvoT", "players": [] },
+    { "type": "taboo", "maxPlayers": 4, "id": "jQ63qnMj6d", "players": [] },
+    { "type": "taboo", "maxPlayers": 4, "id": "OtjhGK5kII", "players": [] },
+    { "type": "taboo", "maxPlayers": 4, "id": "68gEul9BQ7", "players": [] }
+]

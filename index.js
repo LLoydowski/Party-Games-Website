@@ -1,10 +1,11 @@
 import cookieParser from "cookie-parser";
 import express from "express";
-import fs from "fs";
+import fs, { promises } from "fs";
 
 const app = express();
 
 const GAME_ID_SIZE = 10;
+const USERS_DATA_PATH = "data/users.json";
 let games = [];
 
 function generateGameID() {
@@ -13,24 +14,36 @@ function generateGameID() {
 
     let id = "";
 
-    // do {
-    for (let i = 0; i < GAME_ID_SIZE; i++) {
-        let randomIndex = Math.floor(Math.random() * chars.length);
-        let char = chars[randomIndex];
+    do {
+        id = "";
+        for (let i = 0; i < GAME_ID_SIZE; i++) {
+            let randomIndex = Math.floor(Math.random() * chars.length);
+            let char = chars[randomIndex];
 
-        id += char;
-    }
-    // } while (
-    //     () => {
-    //         games.forEach((game) => {
-    //             if (game.id == id) {
-    //                 return false;
-    //             }
-    //         });
+            id += char;
+        }
+    } while (games.some((game) => game.id === id));
 
-    //         return false;
-    //     }
-    // );
+    return id;
+}
+
+function generatePlayerID() {
+    const chars =
+        "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+
+    let id = "";
+
+    let players = readFile(USERS_DATA_PATH);
+
+    do {
+        id = "";
+        for (let i = 0; i < GAME_ID_SIZE; i++) {
+            let randomIndex = Math.floor(Math.random() * chars.length);
+            let char = chars[randomIndex];
+
+            id += char;
+        }
+    } while (players.some((player) => player.id === id));
 
     return id;
 }
@@ -94,6 +107,12 @@ async function writeFile(path, data) {
     });
 }
 
+function readFile(path) {
+    let data = fs.readFileSync(path, { encoding: "utf8" });
+
+    return data;
+}
+
 app.set("view engine", "ejs");
 
 app.use(express.static("static"));
@@ -123,6 +142,8 @@ app.post("/createtaboo", (req, res) => {
 
     games.push(game);
 
+    console.log(games.length);
+
     writeLogs();
 });
 
@@ -133,14 +154,27 @@ app.get("/signup", (req, res) => {
     res.render("signup.ejs");
 });
 
-app.post("/signup", (req, res) => {
+app.post("/signup", async (req, res) => {
     const reqBody = req.body;
 
     const username = reqBody["username"];
     const email = reqBody["email"];
     const password = reqBody["password"];
 
-    console.log(username, email, password);
+    let users = JSON.parse(readFile(USERS_DATA_PATH));
+
+    console.log(users);
+
+    let user = {
+        username: username,
+        email: email,
+        password: password,
+        id: "static",
+    };
+
+    users.push(user);
+
+    writeFile(USERS_DATA_PATH, JSON.stringify(users));
 });
 
 app.listen(7676, () => {
