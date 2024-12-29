@@ -5,7 +5,7 @@ async function createLobby(type) {
         maxPlayers: 4,
     };
 
-    let fetchPromise = fetch(url, {
+    let fetchPromise = await fetch(url, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -13,9 +13,7 @@ async function createLobby(type) {
         },
     });
 
-    Promise.resolve(fetch).then(() => {
-        console.log("Emm co do sigmy?");
-    });
+    console.log(fetchPromise);
 }
 
 function showCreateUI() {}

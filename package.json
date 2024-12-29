@@ -1,18 +1,26 @@
 {
-  "name": "party-games",
-  "version": "0.0.1",
-  "description": "A website for friends wanting to play some party games at 3:00 AM",
-  "main": "index.js",
-  "scripts": {
-    "test": "run"
-  },
-  "author": "LLoydowskki",
-  "license": "ISC",
-  "dependencies": {
-    "cookie-parser": "^1.4.7",
-    "ejs": "^3.1.10",
-    "express": "^4.21.2",
-    "nodemon": "^3.1.9"
-  },
-  "type": "module"
+    "name": "party-games",
+    "version": "0.0.1",
+    "description": "A website for friends wanting to play some party games at 3:00 AM",
+    "main": "index.js",
+    "scripts": {
+        "test": "nodemon --watch server --ext js"
+    },
+    "author": "LLoydowskki",
+    "license": "ISC",
+    "dependencies": {
+        "cookie-parser": "^1.4.7",
+        "ejs": "^3.1.10",
+        "express": "^4.21.2",
+        "nodemon": "^3.1.9"
+    },
+    "type": "module",
+    "nodemonConfig": {
+        "watch": [
+            "index"
+        ],
+        "ext": "js",
+        "ignore": [],
+        "delay": "3"
+    }
 }

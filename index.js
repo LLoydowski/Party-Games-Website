@@ -2,9 +2,12 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import fs, { promises } from "fs";
 
+import validations from "./validations.js";
+
 const app = express();
 
 const GAME_ID_SIZE = 10;
+const USER_ID_SIZE = 10;
 const USERS_DATA_PATH = "data/users.json";
 let games = [];
 
@@ -33,11 +36,11 @@ function generatePlayerID() {
 
     let id = "";
 
-    let players = readFile(USERS_DATA_PATH);
+    let players = JSON.parse(readFile(USERS_DATA_PATH));
 
     do {
         id = "";
-        for (let i = 0; i < GAME_ID_SIZE; i++) {
+        for (let i = 0; i < USER_ID_SIZE; i++) {
             let randomIndex = Math.floor(Math.random() * chars.length);
             let char = chars[randomIndex];
 
@@ -102,8 +105,6 @@ async function writeFile(path, data) {
             console.log(`Error writing file at ${path}`);
             return;
         }
-
-        console.log("File written succesfully");
     });
 }
 
@@ -163,18 +164,22 @@ app.post("/signup", async (req, res) => {
 
     let users = JSON.parse(readFile(USERS_DATA_PATH));
 
-    console.log(users);
+    const userID = generatePlayerID();
 
     let user = {
         username: username,
         email: email,
         password: password,
-        id: "static",
+        id: userID,
     };
 
     users.push(user);
 
     writeFile(USERS_DATA_PATH, JSON.stringify(users));
+
+    res.cookie("userID", userID);
+
+    res.send("User created");
 });
 
 app.listen(7676, () => {
