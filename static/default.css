@@ -6,6 +6,8 @@
     --btn: #1a0d96;
     --text: rgb(194, 192, 212);
     --accent: #5942ff;
+    --warning: #ff5e5e;
+    --warningText: #ebdddd;
 }
 
 body {
@@ -100,4 +102,8 @@ nav {
 }
 .profile p {
     font-size: 1vw;
+}
+
+.warning {
+    background-color: #000000;
 }

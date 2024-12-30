@@ -1,8 +1,13 @@
 import cookieParser from "cookie-parser";
 import express from "express";
-import fs, { promises } from "fs";
 
-import validations from "./validations.js";
+import {
+    validateEmail,
+    validatePassword,
+    validateUsername,
+} from "./validations.js";
+
+import { writeFile, readFile } from "./fileManagement.js";
 
 const app = express();
 
@@ -99,21 +104,6 @@ class GameLobby {
     }
 }
 
-async function writeFile(path, data) {
-    fs.writeFile(path, data, (err) => {
-        if (err) {
-            console.log(`Error writing file at ${path}`);
-            return;
-        }
-    });
-}
-
-function readFile(path) {
-    let data = fs.readFileSync(path, { encoding: "utf8" });
-
-    return data;
-}
-
 app.set("view engine", "ejs");
 
 app.use(express.static("static"));
@@ -158,13 +148,31 @@ app.get("/signup", (req, res) => {
 app.post("/signup", async (req, res) => {
     const reqBody = req.body;
 
-    const username = reqBody["username"];
-    const email = reqBody["email"];
-    const password = reqBody["password"];
+    const username = reqBody["username"].trim();
+    const email = reqBody["email"].trim();
+    const password = reqBody["password"].trim();
 
     let users = JSON.parse(readFile(USERS_DATA_PATH));
 
     const userID = generatePlayerID();
+
+    const usernameValidation = validateUsername(username);
+    if (usernameValidation.type == "error") {
+        res.send(usernameValidation);
+        return;
+    }
+
+    const emailValidation = validateEmail(email);
+    if (emailValidation.type == "error") {
+        res.send(emailValidation);
+        return;
+    }
+
+    const passwordValidation = validatePassword(password);
+    if (passwordValidation.type == "error") {
+        res.send(passwordValidation);
+        return;
+    }
 
     let user = {
         username: username,
@@ -179,7 +187,9 @@ app.post("/signup", async (req, res) => {
 
     res.cookie("userID", userID);
 
-    res.send("User created");
+    res.send({
+        type: "succes",
+    });
 });
 
 app.listen(7676, () => {

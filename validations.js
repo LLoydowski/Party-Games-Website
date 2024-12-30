@@ -1,4 +1,4 @@
-function validatePassword(password) {
+export function validatePassword(password) {
     const letters = "qwertyuiopasdfghjklzxcvbnm";
     const numbers = "1234567890";
     const specialSigns = "!@#$%^&*()_-+=";
@@ -9,6 +9,7 @@ function validatePassword(password) {
         return {
             type: "error",
             errCode: 1,
+            category: "password",
         };
     }
 
@@ -16,7 +17,6 @@ function validatePassword(password) {
 
     for (let i = 0; i < password.length; i++) {
         let char = password[i];
-        console.log(char);
 
         if (numbers.includes(char)) {
             numberAndSpecialCounter++;
@@ -24,12 +24,13 @@ function validatePassword(password) {
             numberAndSpecialCounter++;
         } else if (
             letters.includes(char) ||
-            letters.includes(char.toUpperCase())
+            letters.includes(char.toLowerCase())
         ) {
         } else {
             return {
                 type: "error",
                 errCode: 3,
+                category: "password",
                 char: char,
             };
         }
@@ -39,22 +40,25 @@ function validatePassword(password) {
         return {
             type: "error",
             errCode: 2,
+            category: "password",
         };
     }
 
     return {
         type: "success",
         errCode: 0,
+        category: "password",
     };
 }
 
-function validateEmail(email) {
+export function validateEmail(email) {
     const validChars = "qwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*()_-+=.";
 
-    if (username.lenght > 64) {
+    if (email.length > 64) {
         return {
             type: "error",
             errCode: 4,
+            category: "email",
         };
     }
 
@@ -62,6 +66,7 @@ function validateEmail(email) {
         return {
             type: "error",
             errCode: 1,
+            category: "email",
         };
     }
 
@@ -69,6 +74,7 @@ function validateEmail(email) {
         return {
             type: "error",
             errCode: 2,
+            category: "email",
         };
     }
 
@@ -77,11 +83,12 @@ function validateEmail(email) {
 
         if (
             !validChars.includes(char) &&
-            !validChars.includes(char.toUpperCase())
+            !validChars.includes(char.toLowerCase())
         ) {
             return {
                 type: "error",
                 errCode: 3,
+                category: "email",
                 char: char,
             };
         }
@@ -93,13 +100,14 @@ function validateEmail(email) {
     };
 }
 
-function validateUsername(username) {
+export function validateUsername(username) {
     const validChars = "qwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*()_-+=";
 
-    if (username.lenght > 32) {
+    if (username.length > 32) {
         return {
             type: "error",
             errCode: 2,
+            category: "username",
         };
     }
 
@@ -108,11 +116,12 @@ function validateUsername(username) {
 
         if (
             !validChars.includes(char) &&
-            !validChars.includes(char.toUpperCase())
+            !validChars.includes(char.toLowerCase())
         ) {
             return {
                 type: "error",
                 errCode: 1,
+                category: "username",
                 char: char,
             };
         }

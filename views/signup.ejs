@@ -43,19 +43,30 @@
                 </a>
             </nav>
             <div class="content">
+                <div class="warning">
+                    <h2>Warning!</h2>
+                    <p>Your email doesn't contain "@" sign</p>
+                </div>
                 <div class="signup">
                     <h2>Sign up</h2>
                     <input
                         type="text"
                         placeholder="username..."
                         id="username"
+                        required
                     />
-                    <input type="email" placeholder="email..." id="email" />
+                    <input
+                        type="email"
+                        placeholder="email..."
+                        id="email"
+                        required
+                    />
                     <span>
                         <input
                             type="password"
                             placeholder="password..."
                             id="password"
+                            required
                         />
                         <p>
                             You have an account? Log in
