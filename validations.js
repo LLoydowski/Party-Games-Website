@@ -10,6 +10,7 @@ export function validatePassword(password) {
             type: "error",
             errCode: 1,
             category: "password",
+            desc: "Password too short / long",
         };
     }
 
@@ -31,6 +32,7 @@ export function validatePassword(password) {
                 type: "error",
                 errCode: 3,
                 category: "password",
+                desc: "Wrong character used",
                 char: char,
             };
         }
@@ -41,6 +43,7 @@ export function validatePassword(password) {
             type: "error",
             errCode: 2,
             category: "password",
+            desc: "Not enough numbers / special signs",
         };
     }
 
@@ -59,6 +62,7 @@ export function validateEmail(email) {
             type: "error",
             errCode: 4,
             category: "email",
+            desc: "Email to long",
         };
     }
 
@@ -67,6 +71,7 @@ export function validateEmail(email) {
             type: "error",
             errCode: 1,
             category: "email",
+            desc: `No "@" sign`,
         };
     }
 
@@ -75,6 +80,7 @@ export function validateEmail(email) {
             type: "error",
             errCode: 2,
             category: "email",
+            desc: `No "." sign`,
         };
     }
 
@@ -89,6 +95,7 @@ export function validateEmail(email) {
                 type: "error",
                 errCode: 3,
                 category: "email",
+                desc: "Wrong char used",
                 char: char,
             };
         }
@@ -108,6 +115,7 @@ export function validateUsername(username) {
             type: "error",
             errCode: 2,
             category: "username",
+            desc: "Username too long",
         };
     }
 
@@ -122,6 +130,7 @@ export function validateUsername(username) {
                 type: "error",
                 errCode: 1,
                 category: "username",
+                desc: "Wrong char used",
                 char: char,
             };
         }

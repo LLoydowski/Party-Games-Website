@@ -82,6 +82,64 @@ function writeLogs() {
     writeFile("logs/games.json", JSON.stringify(data));
 }
 
+function getUserFromID(id) {
+    const users = JSON.parse(readFile(USERS_DATA_PATH));
+
+    for (let i = 0; i < users.length; i++) {
+        let user = users[i];
+
+        if (user.id == id) {
+            return user;
+        }
+    }
+
+    return "a";
+}
+
+function logUserIn(login, password) {
+    const users = JSON.parse(readFile(USERS_DATA_PATH));
+
+    for (let i = 0; i < users.length; i++) {
+        let user = users[i];
+
+        if (user.username == login || user.email == login) {
+            if (user.password == password) {
+                return {
+                    type: "succes",
+                    errCode: 0,
+                    desc: "User logged in",
+                    user: user,
+                };
+            }
+            return {
+                type: "error",
+                errCode: 2,
+                desc: "Wrong password",
+            };
+        }
+    }
+
+    return {
+        type: "error",
+        errCode: 1,
+        desc: "No such user",
+    };
+}
+
+function doesUserIDExist(id) {
+    const users = JSON.parse(readFile(USERS_DATA_PATH));
+
+    for (let i = 0; i < users.length; i++) {
+        let user = users[i];
+
+        if (user.id == id) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 class Player {
     constructor(name, id) {
         this.name = name;
@@ -111,16 +169,21 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
-    console.log(req.query);
+    const userID = req.cookies["userID"];
+    const user = getUserFromID(userID);
 
-    let nick = req.cookies["nick"];
+    let nick = "";
+
+    if (user == undefined) {
+        nick = "";
+    } else {
+        nick = user.username;
+    }
 
     res.render("lobbies.ejs", { nick: nick });
 });
 
 app.get("/createlobby", (req, res) => {
-    console.log(req.query);
-
     let nick = req.cookies["nick"];
 
     res.render("createLobby.ejs", { nick: nick });
@@ -139,10 +202,37 @@ app.post("/createtaboo", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
+    const cookies = req.cookies;
+
+    if (doesUserIDExist(cookies["userID"])) {
+        res.redirect("/");
+        return;
+    }
+
     res.render("login.ejs");
 });
 app.get("/signup", (req, res) => {
+    const cookies = req.cookies;
+
+    if (doesUserIDExist(cookies["userID"])) {
+        res.redirect("/");
+    }
+
     res.render("signup.ejs");
+});
+
+app.post("/login", (req, res) => {
+    const reqBody = req.body;
+
+    const login = reqBody["login"].trim();
+    const password = reqBody["password"].trim();
+
+    const status = logUserIn(login, password);
+    const user = status.user;
+
+    res.cookie("userID", user.id);
+
+    res.send(status);
 });
 
 app.post("/signup", async (req, res) => {

@@ -45,18 +45,27 @@
             <div class="content">
                 <div class="login">
                     <h2>Login</h2>
-                    <input type="text" placeholder="username..." />
+                    <input
+                        type="text"
+                        placeholder="username or email..."
+                        id="login"
+                    />
                     <span>
-                        <input type="password" placeholder="password..." />
+                        <input
+                            type="password"
+                            placeholder="password..."
+                            id="password"
+                        />
                         <p>
                             You doesn't have an account? Click
                             <a href="/signup">here</a>
                         </p>
                     </span>
-                    <button>Log in</button>
+                    <button onclick="login()">Log in</button>
                 </div>
             </div>
         </div>
         <script src="default.js"></script>
+        <script src="login.js"></script>
     </body>
 </html>
